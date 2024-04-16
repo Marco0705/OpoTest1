@@ -3,13 +3,19 @@ package es.ifp.opotest;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -24,15 +30,19 @@ public class RegistroActivity extends AppCompatActivity {
     protected EditText label7;
     protected RadioButton radio1;
     protected RadioButton radio2;
+    protected RadioGroup radioG;
     protected CheckBox check1;
     protected Button boton1;
     protected Button boton2;
+    protected DataBaseSQL db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+
+        db = new DataBaseSQL(this);
 
         label1 = (TextView) findViewById(R.id.label1_registro);
         label2 = (EditText) findViewById(R.id.label2_registro);
@@ -43,6 +53,7 @@ public class RegistroActivity extends AppCompatActivity {
         label7 = (EditText) findViewById(R.id.label7_registro);
         radio1 = (RadioButton) findViewById(R.id.radio1_registro);
         radio2 = (RadioButton) findViewById(R.id.radio2_registro);
+        radioG = (RadioGroup) findViewById(R.id.radioGroup_registro);
         check1 = (CheckBox) findViewById(R.id.check1_registro);
         boton1 = (Button) findViewById(R.id.boton1_registro);
         boton2 = (Button) findViewById(R.id.boton2_registro);
@@ -52,9 +63,61 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent pasarPantalla = new Intent(RegistroActivity.this, IniciarActivity.class);
-                finish();
-                startActivity(pasarPantalla);
+                String nombre = label2.getText().toString();
+                String email = label3.getText().toString();
+                String pass1 = label4.getText().toString();
+                String pass2 = label5.getText().toString();
+                String cuenta = label6.getText().toString();
+
+
+                if(nombre.equals("") || email.equals("") || pass1.equals("") || pass2.equals("") || cuenta.equals("")){
+
+                    Toast toast = Toast.makeText(RegistroActivity.this, "Debes rellenar todos los campos", Toast.LENGTH_LONG);
+
+                    SpannableString spannableString = new SpannableString(toast.getText());
+
+
+                    ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.RED);
+
+
+                    spannableString.setSpan(foregroundColorSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                    toast.setText(spannableString);
+
+                    toast.show();
+
+                }
+                else{
+
+                    String plan = "";
+
+                    if(radio1.isChecked()){
+
+                        plan = "Plan mensual";
+                    }
+                    else if(radio2.isChecked()){
+
+                        plan = "Plan anual";
+                    }
+
+                    if(pass1.equals(pass2)){
+
+                        db.crearUsuario(nombre, email, pass1, plan, cuenta);
+
+
+                    }
+                    else{
+
+                        Toast.makeText(RegistroActivity.this, "La contraseña no coincide", Toast.LENGTH_SHORT).show();
+                    }
+
+                    Intent pasarPantalla = new Intent(RegistroActivity.this, IniciarActivity.class);
+                    finish();
+                    startActivity(pasarPantalla);
+
+
+                }
             }
         });
 

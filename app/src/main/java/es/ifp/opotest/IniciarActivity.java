@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class IniciarActivity extends AppCompatActivity {
 
@@ -16,11 +17,14 @@ public class IniciarActivity extends AppCompatActivity {
     protected EditText label3;
     protected Button boton1;
     protected Button boton2;
+    protected DataBaseSQL db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iniciar);
+
+        db = new DataBaseSQL(this);
 
         label1 = (TextView) findViewById(R.id.label1_inciar);
         label2 = (EditText) findViewById(R.id.label2_iniciar);
@@ -28,15 +32,28 @@ public class IniciarActivity extends AppCompatActivity {
         boton1 = (Button) findViewById(R.id.boton1_iniciar);
         boton2 = (Button) findViewById(R.id.boton2_iniciar);
 
+
         boton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                // INCIAR SESION
+                String usuario = label2.getText().toString();
+                String pass = label3.getText().toString();
 
-                Intent pasarPantalla = new Intent(IniciarActivity.this, ComenzarActivity.class);
-                finish();
-                startActivity(pasarPantalla);
+                if (usuario.equals("admin") && pass.equals("admin") ){
+
+                    Intent pasarPantalla1 = new Intent(IniciarActivity.this, AdminActivity.class);
+                    finish();
+                    startActivity(pasarPantalla1);
+                    Toast.makeText(IniciarActivity.this, "OKKKKKKKK", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+
+                    Intent pasarPantalla = new Intent(IniciarActivity.this, ComenzarActivity.class);
+                    finish();
+                    startActivity(pasarPantalla);
+                }
             }
         });
 

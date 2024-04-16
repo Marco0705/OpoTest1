@@ -13,11 +13,14 @@ public class StartActivity extends AppCompatActivity {
     protected TextView label1;
     protected Button boton1;
     protected Button boton2;
+    protected DataBaseSQL db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DataBaseSQL(this);
 
         label1 = (TextView) findViewById(R.id.label1_start);
         boton1 = (Button) findViewById(R.id.boton1_start);
