@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
-public class RegistroActivity extends AppCompatActivity {
+public class  RegistroActivity extends AppCompatActivity {
 
     protected TextView label1;
     protected EditText label2;
@@ -63,32 +63,21 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String nombre = label2.getText().toString();
-                String email = label3.getText().toString();
-                String pass1 = label4.getText().toString();
-                String pass2 = label5.getText().toString();
-                String cuenta = label6.getText().toString();
+                String nombre = String.valueOf(label2.getText());
+                String email = String.valueOf(label3.getText());
+                String pass1 = String.valueOf(label4.getText());
+                String pass2 = String.valueOf(label5.getText());
+                String cuenta = String.valueOf(label6.getText());
 
 
-                if(nombre.equals("") || email.equals("") || pass1.equals("") || pass2.equals("") || cuenta.equals("")){
+                if(nombre.equals("") || email.equals("") || pass1.equals("") || pass2.equals("") || cuenta.equals("") || ((!radio1.isChecked()) && (!radio2.isChecked())) || (!check1.isChecked())){
 
-                    Toast toast = Toast.makeText(RegistroActivity.this, "Debes rellenar todos los campos", Toast.LENGTH_LONG);
-
-                    SpannableString spannableString = new SpannableString(toast.getText());
+                    Toast.makeText(RegistroActivity.this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show();
 
 
-                    ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.RED);
-
-
-                    spannableString.setSpan(foregroundColorSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
-                    toast.setText(spannableString);
-
-                    toast.show();
 
                 }
-                else{
+               else{
 
                     String plan = "";
 
@@ -104,6 +93,9 @@ public class RegistroActivity extends AppCompatActivity {
                     if(pass1.equals(pass2)){
 
                         db.crearUsuario(nombre, email, pass1, plan, cuenta);
+                        Intent pasarPantalla = new Intent(RegistroActivity.this, IniciarActivity.class);
+                        finish();
+                        startActivity(pasarPantalla);
 
 
                     }
@@ -112,9 +104,7 @@ public class RegistroActivity extends AppCompatActivity {
                         Toast.makeText(RegistroActivity.this, "La contraseña no coincide", Toast.LENGTH_SHORT).show();
                     }
 
-                    Intent pasarPantalla = new Intent(RegistroActivity.this, IniciarActivity.class);
-                    finish();
-                    startActivity(pasarPantalla);
+
 
 
                 }
