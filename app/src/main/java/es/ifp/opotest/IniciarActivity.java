@@ -49,10 +49,21 @@ public class IniciarActivity extends AppCompatActivity {
 
                 }
                 else{
+                    if(db.usuarioExiste(label2.getText().toString())){
+                        if(db.password(label2.getText().toString(), label3.getText().toString())){
+                            Intent pasarPantalla = new Intent(IniciarActivity.this, ComenzarActivity.class);
+                            finish();
+                            startActivity(pasarPantalla);
+                        }
+                        else {
+                            Toast.makeText(IniciarActivity.this, "La contraseña no coincide", Toast.LENGTH_SHORT).show();
+                        }
 
-                    Intent pasarPantalla = new Intent(IniciarActivity.this, ComenzarActivity.class);
-                    finish();
-                    startActivity(pasarPantalla);
+                    }
+                    else {
+                        Toast.makeText(IniciarActivity.this, "El usuario no existe", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });

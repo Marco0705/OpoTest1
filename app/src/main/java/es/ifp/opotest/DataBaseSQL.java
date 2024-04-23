@@ -34,6 +34,32 @@ import java.util.ArrayList;
             return true;
         }
 
+        public boolean usuarioExiste(String nombreUsuario) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM  usuarios  WHERE  email   = ?",
+                    new String[]{nombreUsuario});
+            boolean existe = cursor.getCount() > 0;
+            cursor.close();
+            return existe;
+        }
+
+        public boolean password(String nombreUsuario, String contraseñaIntroducida) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT contraseña FROM  usuarios  WHERE  email = ?",
+                    new String[]{nombreUsuario});
+
+            boolean existe = false;
+
+            if (cursor.moveToFirst()) {
+                // Obtiene la contraseña almacenada en la base de datos
+                String contraseñaAlmacenada = cursor.getString(cursor.getColumnIndex("contraseña"));
+
+                // Compara la contraseña almacenada con la contraseña introducida por el usuario
+                existe = contraseñaAlmacenada.equals(contraseñaIntroducida);
+            }
+            return existe;
+        }
+
         public boolean oposiciones(String nombreOposicion){
 
             SQLiteDatabase db = this.getWritableDatabase();
@@ -71,30 +97,53 @@ import java.util.ArrayList;
             return audios;
         }
 
-        public String obtenerTitulo(int id) {
+        public String enunciado(int id) {
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor res = db.rawQuery("SELECT titulo FROM media WHERE id = ?", new String[]{String.valueOf(id)});
-            String titulo = "";
+            Cursor res = db.rawQuery("SELECT enunciado FROM preguntas WHERE preguntasId = ?", new String[]{String.valueOf(id)});
+            String enunciado = "";
             if (res.moveToFirst()) {
-                titulo = res.getString(0);
+                enunciado = res.getString(0);
             }
             res.close();
             db.close();
-            return titulo;
+            return enunciado;
         }
 
-        public String obtenerUrl(int id) {
+        public String opcion1(int id) {
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor res = db.rawQuery("SELECT url FROM media WHERE id = ?", new String[]{String.valueOf(id)});
-            String url = "";
+            Cursor res = db.rawQuery("SELECT opcion1 FROM preguntas WHERE preguntasId = ?", new String[]{String.valueOf(id)});
+            String opcion1 = "";
             if (res.moveToFirst()) {
-                url = res.getString(0);
+                opcion1 = res.getString(0);
             }
             res.close();
             db.close();
-            return url;
+            return opcion1;
         }
 
+        public String opcion2(int id) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor res = db.rawQuery("SELECT opcion2 FROM preguntas WHERE preguntasId = ?", new String[]{String.valueOf(id)});
+            String opcion2 = "";
+            if (res.moveToFirst()) {
+                opcion2 = res.getString(0);
+            }
+            res.close();
+            db.close();
+            return opcion2;
+        }
+
+        public String opcionCorrecta(int id) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor res = db.rawQuery("SELECT opcionCorrecta FROM preguntas WHERE preguntasId = ?", new String[]{String.valueOf(id)});
+            String opcionCorrecta = "";
+            if (res.moveToFirst()) {
+                opcionCorrecta = res.getString(0);
+            }
+            res.close();
+            db.close();
+            return opcionCorrecta;
+        }
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
