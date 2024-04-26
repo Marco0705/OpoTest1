@@ -114,6 +114,7 @@ import java.util.ArrayList;
             opcionCorrecta = " Sí es obligatorio desde 1999.";
             db.execSQL(sql, new String[]{enunciado, opcion1, opcion2, opcionCorrecta});
 
+
         }
 
 
