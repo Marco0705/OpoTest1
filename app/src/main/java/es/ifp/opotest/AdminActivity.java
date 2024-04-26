@@ -47,7 +47,7 @@ public class AdminActivity extends AppCompatActivity {
                 String opcion2 = String.valueOf(label4.getText());
                 String opcionCorrecta = String.valueOf(label5.getText());
 
-                db.crearPregunta(enunciado, opcion1, opcion2, opcionCorrecta);
+                db.crearPregunta();
                 Intent pasarPantalla = new Intent(AdminActivity.this, AdminActivity.class);
                 finish();
                 startActivity(pasarPantalla);

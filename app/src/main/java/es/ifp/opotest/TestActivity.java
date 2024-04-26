@@ -25,30 +25,19 @@ public class TestActivity extends AppCompatActivity {
     protected RadioButton radio3;
 
     protected RadioButton radio4;
-
     protected RadioButton radio5;
-
     protected RadioButton radio6;
-
     protected RadioButton radio7;
-
     protected RadioButton radio8;
-
     protected RadioButton radio9;
-
     protected RadioButton radio10;
-
     protected RadioButton radio11;
-
     protected RadioButton radio12;
-
     protected DataBaseSQL db;
-
     protected String opcionCorrecta;
-
     protected int numAciertos = 0;
-
     protected int numFallos = 0;
+
 
 
     @Override
@@ -80,6 +69,8 @@ public class TestActivity extends AppCompatActivity {
         radio10 = (RadioButton) findViewById(R.id.radio10_test);
         radio11 = (RadioButton) findViewById(R.id.radio11_test);
         radio12 = (RadioButton) findViewById(R.id.radio12_test);
+
+        db.crearPregunta();
 
         label1.setText(db.enunciado(1));
         radio1.setText(db.opcion1(1));
@@ -125,7 +116,7 @@ public class TestActivity extends AppCompatActivity {
                         numFallos++;
                     }
                 }
-                if (radio2.isChecked()) {
+                else if (radio2.isChecked()) {
 
                     if (radio2.getText().toString().equals(opcionCorrecta)) {
                         numAciertos++;
@@ -134,6 +125,9 @@ public class TestActivity extends AppCompatActivity {
                     } else {
                         numFallos++;
                     }
+                } else {
+
+                    numFallos++;
                 }
 
 
@@ -151,7 +145,7 @@ public class TestActivity extends AppCompatActivity {
                         numFallos++;
                     }
                 }
-                if (radio4.isChecked()) {
+                else if (radio4.isChecked()) {
 
                     if (radio4.getText().toString().equals(opcionCorrecta)) {
                         numAciertos++;
@@ -160,6 +154,9 @@ public class TestActivity extends AppCompatActivity {
                     } else {
                         numFallos++;
                     }
+                }
+                else {
+                    numFallos++;
                 }
 
 
@@ -176,17 +173,18 @@ public class TestActivity extends AppCompatActivity {
                         numFallos++;
                     }
                 }
-                if (radio6.isChecked()) {
+                else if (radio6.isChecked()) {
 
                     if (radio6.getText().toString().equals(opcionCorrecta)) {
                         numAciertos++;
-
 
                     } else {
                         numFallos++;
                     }
                 }
-
+                else {
+                    numFallos++;
+                }
 
 
                 opcionCorrecta = db.opcionCorrecta(4);
@@ -202,7 +200,7 @@ public class TestActivity extends AppCompatActivity {
                         numFallos++;
                     }
                 }
-                if (radio8.isChecked()) {
+                else if (radio8.isChecked()) {
 
                     if (radio8.getText().toString().equals(opcionCorrecta)) {
                         numAciertos++;
@@ -211,6 +209,9 @@ public class TestActivity extends AppCompatActivity {
                     } else {
                         numFallos++;
                     }
+                }
+                else {
+                    numFallos++;
                 }
 
 
@@ -228,7 +229,7 @@ public class TestActivity extends AppCompatActivity {
                         numFallos++;
                     }
                 }
-                if (radio10.isChecked()) {
+                else if (radio10.isChecked()) {
 
                     if (radio10.getText().toString().equals(opcionCorrecta)) {
                         numAciertos++;
@@ -238,9 +239,9 @@ public class TestActivity extends AppCompatActivity {
                         numFallos++;
                     }
                 }
-
-
-
+                else {
+                    numFallos++;
+                }
                 opcionCorrecta = db.opcionCorrecta(6);
 
 
@@ -254,7 +255,7 @@ public class TestActivity extends AppCompatActivity {
                         numFallos++;
                     }
                 }
-                if (radio12.isChecked()) {
+                else if (radio12.isChecked()) {
 
                     if (radio12.getText().toString().equals(opcionCorrecta)) {
                         numAciertos++;
@@ -264,8 +265,13 @@ public class TestActivity extends AppCompatActivity {
                         numFallos++;
                     }
                 }
+                else {
+                    numFallos++;
+                }
 
                 Intent pasarPantalla = new Intent(TestActivity.this, ResultadoActivity.class);
+                pasarPantalla.putExtra("NUMACIERTOS", numAciertos);
+                pasarPantalla.putExtra("NUMFALLOS", numFallos);
                 finish();
                 startActivity(pasarPantalla);
 

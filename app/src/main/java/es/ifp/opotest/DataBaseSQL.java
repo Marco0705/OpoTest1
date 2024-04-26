@@ -67,12 +67,53 @@ import java.util.ArrayList;
             return true;
         }
 
-        public boolean crearPregunta(String enunciado, String opcion1, String opcion2, String opcionCorrecta){
+        public void crearPregunta(){
+
+            String enunciado = "";
+            String opcion1 = "";
+            String opcion2 = "";
+            String opcionCorrecta = "";
 
             SQLiteDatabase db = this.getWritableDatabase();
             String sql = "INSERT INTO preguntas (oposicionesId, enunciado, opcion1, opcion2, opcionCorrecta) VALUES (1, ?, ?,?, ?)";
+             enunciado = "¿Para qué se usa el dispositivo ASAP LOCK de la marca PETZL?";
+             opcion1 = "Como anticaídas deslizante para cuerda con función de bloqueo.";
+             opcion2 = "Como polifreno en el que la polea tiene incorporado un bloqueador.";
+             opcionCorrecta = "Como anticaídas deslizante para cuerda con función de bloqueo.";
             db.execSQL(sql, new String[]{enunciado, opcion1, opcion2, opcionCorrecta});
-            return true;
+
+            enunciado = "¿Cuantos manorreductores son necesarios para trabajar con dos cojines de alta presión con \n" +
+                    "consola simultáneamente?";
+            opcion1 = "2";
+            opcion2 = "1";
+            opcionCorrecta = "1";
+            db.execSQL(sql, new String[]{enunciado, opcion1, opcion2, opcionCorrecta});
+
+            enunciado = "La ruptura del cinturón térmico de una inversión térmica se produce.";
+            opcion1 = "A media mañana, cuando se calienta más el fondo del valle.";
+            opcion2 = "Por la noche a medida que el aire cercano al suelo se enfría más rápido que el de capas \n" +
+                    "superiores.";
+            opcionCorrecta = "A media mañana, cuando se calienta más el fondo del valle.";
+            db.execSQL(sql, new String[]{enunciado, opcion1, opcion2, opcionCorrecta});
+
+            enunciado = "Cuando hablamos del Hosemaster nos referimos a:";
+            opcion1 = "Un equipo de espuma contraincendios.";
+            opcion2 =  "Un equipo para excarcelación.";
+            opcionCorrecta = "Un equipo de espuma contraincendios.";
+            db.execSQL(sql, new String[]{enunciado, opcion1, opcion2, opcionCorrecta});
+
+            enunciado = "¿Cómo denominamos a las poleas móviles cuando las utilizamos en un polipasto?";
+            opcion1 = "Palancas de primera clase.";
+            opcion2 =  "Palancas de segunda clase.";
+            opcionCorrecta = "Palancas de segunda clase.";
+            db.execSQL(sql, new String[]{enunciado, opcion1, opcion2, opcionCorrecta});
+
+            enunciado = "¿Es obligatorio que un ascensor disponga de una comunicación en cabina con el exterior?";
+            opcion1 = "Solo es obligatorio para ascensores de 4 o más personas. ";
+            opcion2 =  " Sí es obligatorio desde 1999.";
+            opcionCorrecta = " Sí es obligatorio desde 1999.";
+            db.execSQL(sql, new String[]{enunciado, opcion1, opcion2, opcionCorrecta});
+
         }
 
 
@@ -149,5 +190,7 @@ import java.util.ArrayList;
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
         }
+
+
     }
 
