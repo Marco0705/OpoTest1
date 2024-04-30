@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
-public class  RegistroActivity extends AppCompatActivity {
+
+public class RegistroActivity extends AppCompatActivity {
+
 
     protected TextView label1;
     protected EditText label2;
@@ -43,6 +45,8 @@ public class  RegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
 
         db = new DataBaseSQL(this);
+
+        Funciones f= new Funciones();
 
         label1 = (TextView) findViewById(R.id.label1_registro);
         label2 = (EditText) findViewById(R.id.label2_registro);
@@ -70,27 +74,25 @@ public class  RegistroActivity extends AppCompatActivity {
                 String cuenta = String.valueOf(label6.getText());
 
 
-                if(nombre.equals("") || email.equals("") || pass1.equals("") || pass2.equals("") || cuenta.equals("") || ((!radio1.isChecked()) && (!radio2.isChecked())) || (!check1.isChecked())){
+                if (f.campos(nombre, email, pass1, pass2, cuenta, radio1.isChecked(), radio2.isChecked(), check1.isChecked())) {
 
                     Toast.makeText(RegistroActivity.this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show();
 
 
-
-                }
-               else{
+                } else {
 
                     String plan = "";
 
-                    if(radio1.isChecked()){
+                    if (radio1.isChecked()) {
 
                         plan = "Plan mensual";
-                    }
-                    else if(radio2.isChecked()){
+                    } else if (radio2.isChecked()) {
 
                         plan = "Plan anual";
                     }
 
-                    if(pass1.equals(pass2)){
+
+                    if (f.contrasena(pass1, pass2)) {
 
                         db.crearUsuario(nombre, email, pass1, plan, cuenta);
                         Intent pasarPantalla = new Intent(RegistroActivity.this, IniciarActivity.class);
@@ -98,13 +100,10 @@ public class  RegistroActivity extends AppCompatActivity {
                         startActivity(pasarPantalla);
 
 
-                    }
-                    else{
+                    } else {
 
                         Toast.makeText(RegistroActivity.this, "La contraseña no coincide", Toast.LENGTH_SHORT).show();
                     }
-
-
 
 
                 }

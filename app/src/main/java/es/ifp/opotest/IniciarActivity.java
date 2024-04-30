@@ -25,6 +25,7 @@ public class IniciarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_iniciar);
 
         db = new DataBaseSQL(this);
+        Funciones f= new Funciones();
 
         label1 = (TextView) findViewById(R.id.label1_inciar);
         label2 = (EditText) findViewById(R.id.label2_iniciar);
@@ -40,7 +41,7 @@ public class IniciarActivity extends AppCompatActivity {
                 String usuario = label2.getText().toString();
                 String pass = label3.getText().toString();
 
-                if (usuario.equals("admin") && pass.equals("admin") ){
+                if (f.admin(usuario, pass)){
 
                     Intent pasarPantalla1 = new Intent(IniciarActivity.this, AdminActivity.class);
                     finish();
