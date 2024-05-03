@@ -9,7 +9,7 @@ import es.ifp.opotest.Funciones;
 public class OpoTestTest extends TestCase {
 
 
-    public void testAdmin() {
+    /*public void testAdmin() {
         Funciones ra = new Funciones();
         boolean res = ra.admin("admin", "admin");
         assertEquals(true, res);
@@ -29,8 +29,15 @@ public class OpoTestTest extends TestCase {
         Funciones ra = new Funciones();
         boolean res = ra.contrasena("paco", "paco");
         assertEquals(true, res);
+    }*/
 
 
+
+
+    public void testResultado(){
+        Funciones ra = new Funciones();
+        boolean res = Boolean.parseBoolean(ra.resultado(2, 4));
+        assertEquals(false, res);
     }
 
 

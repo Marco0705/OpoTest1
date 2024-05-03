@@ -19,6 +19,7 @@ public class ResultadoActivity extends AppCompatActivity {
     protected Button boton2;
     protected int paquete1;
     protected int paquete2;
+    protected TextView label3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,13 @@ public class ResultadoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resultado);
 
         db = new DataBaseSQL(this);
+        Funciones f = new Funciones();
+
         label1 = (TextView) findViewById(R.id.label1_resultado);
         label2 = (TextView) findViewById(R.id.label2_resultado);
         boton1 = (Button) findViewById(R.id.boton1_resultado);
         boton2 = (Button) findViewById(R.id.boton2_resultado);
+        label3 = (TextView) findViewById(R.id.label3_resultado);
 
         extras=getIntent().getExtras();
         if(extras!=null){
@@ -41,6 +45,7 @@ public class ResultadoActivity extends AppCompatActivity {
             Toast.makeText(this, "Error al pasar el paquete", Toast.LENGTH_SHORT).show();
         }
 
+        label3.setText(f.resultado(paquete1, paquete1));
         boton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

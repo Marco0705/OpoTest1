@@ -46,7 +46,6 @@ public class IniciarActivity extends AppCompatActivity {
                     Intent pasarPantalla1 = new Intent(IniciarActivity.this, AdminActivity.class);
                     finish();
                     startActivity(pasarPantalla1);
-                    Toast.makeText(IniciarActivity.this, "OKKKKKKKK", Toast.LENGTH_SHORT).show();
 
                 }
                 else{

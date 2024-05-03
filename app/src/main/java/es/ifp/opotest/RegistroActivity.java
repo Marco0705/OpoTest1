@@ -74,7 +74,7 @@ public class RegistroActivity extends AppCompatActivity {
                 String cuenta = String.valueOf(label6.getText());
 
 
-                if (f.campos(nombre, email, pass1, pass2, cuenta, radio1.isChecked(), radio2.isChecked(), check1.isChecked())) {
+                if (!f.campos(nombre, email, pass1, pass2, cuenta, radio1.isChecked(), radio2.isChecked(), check1.isChecked())) {
 
                     Toast.makeText(RegistroActivity.this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show();
 
