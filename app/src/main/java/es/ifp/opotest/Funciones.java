@@ -33,20 +33,4 @@ public class Funciones {
 
     }
 
-    /*public boolean opcionCorrecta(int id) {
-        db = new DataBaseSQL(this);
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT opcionCorrecta FROM preguntas WHERE preguntasId = ?", new String[]{String.valueOf(id)});
-        String opcionCorrecta = "";
-        if (res.moveToFirst()) {
-            opcionCorrecta = res.getString(0);
-        }
-        res.close();
-        db.close();
-        return opcionCorrecta;
-    }*/
-
-
-
 }
