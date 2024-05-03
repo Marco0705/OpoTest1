@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class Funciones {
 
+    protected DataBaseSQL db;
 
     public boolean contrasena(String a, String b) {
         if (a.equals(b)) {
@@ -19,7 +20,6 @@ public class Funciones {
         if (nombre.equals("") || email.equals("") || pass1.equals("") || pass2.equals("") || cuenta.equals("") || ((!radio1) && (!radio2)) || (!check1)) {
             return false;
 
-
         }
         return true;
 
@@ -32,6 +32,20 @@ public class Funciones {
         return false;
 
     }
+
+    /*public boolean opcionCorrecta(int id) {
+        db = new DataBaseSQL(this);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT opcionCorrecta FROM preguntas WHERE preguntasId = ?", new String[]{String.valueOf(id)});
+        String opcionCorrecta = "";
+        if (res.moveToFirst()) {
+            opcionCorrecta = res.getString(0);
+        }
+        res.close();
+        db.close();
+        return opcionCorrecta;
+    }*/
 
 
 

@@ -117,27 +117,13 @@ import java.util.ArrayList;
 
         }
 
+        public void borrarTablaPreguntas() {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("DROP TABLE IF EXISTS preguntas");
+            db.execSQL("CREATE TABLE preguntas(preguntasId integer PRIMARY KEY AUTOINCREMENT NOT NULL, oposicionesId INTEGER, enunciado TEXT, opcion1 TEXT, opcion2 TEXT, opcionCorrecta TEXT, foreign key(oposicionesId) references oposiciones(oposicionesId))");
 
-        public ArrayList<String> getAllAudios(){
-
-            ArrayList<String> audios = new ArrayList<String>();
-
-            Cursor res = null;
-            SQLiteDatabase db = this.getReadableDatabase();
-            res = db.rawQuery("SELECT * FROM media", null);
-
-            res.moveToLast();
-            if(res.getCount() > 0){
-
-                res.moveToFirst();
-                while(!res.isAfterLast()){
-                    audios.add(res.getString(0) + ". " + res.getString(1));
-                    res.moveToNext();
-                }
-
-            }
-            return audios;
         }
+
 
         public String enunciado(int id) {
             SQLiteDatabase db = this.getReadableDatabase();

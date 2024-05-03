@@ -70,6 +70,7 @@ public class TestActivity extends AppCompatActivity {
         radio11 = (RadioButton) findViewById(R.id.radio11_test);
         radio12 = (RadioButton) findViewById(R.id.radio12_test);
 
+        db.borrarTablaPreguntas();
         db.crearPregunta();
 
         label1.setText(db.enunciado(1));
