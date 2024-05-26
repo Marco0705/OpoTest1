@@ -117,14 +117,6 @@ import java.util.ArrayList;
 
         }
 
-        public void borrarTablaPreguntas() {
-            SQLiteDatabase db = this.getWritableDatabase();
-            db.execSQL("DROP TABLE IF EXISTS preguntas");
-            db.execSQL("CREATE TABLE preguntas(preguntasId integer PRIMARY KEY AUTOINCREMENT NOT NULL, oposicionesId INTEGER, enunciado TEXT, opcion1 TEXT, opcion2 TEXT, opcionCorrecta TEXT, foreign key(oposicionesId) references oposiciones(oposicionesId))");
-
-        }
-
-
         public String enunciado(int id) {
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor res = db.rawQuery("SELECT enunciado FROM preguntas WHERE preguntasId = ?", new String[]{String.valueOf(id)});
